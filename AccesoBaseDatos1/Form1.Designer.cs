@@ -215,6 +215,7 @@ namespace AccesoBaseDatos1
             this.btnCreaTabla.TabIndex = 19;
             this.btnCreaTabla.Text = "Crear Tabla";
             this.btnCreaTabla.UseVisualStyleBackColor = true;
+            this.btnCreaTabla.Click += new System.EventHandler(this.btnCreaTabla_Click);
             // 
             // btnCrearBD
             // 
@@ -224,6 +225,7 @@ namespace AccesoBaseDatos1
             this.btnCrearBD.TabIndex = 18;
             this.btnCrearBD.Text = "Crear BD";
             this.btnCrearBD.UseVisualStyleBackColor = true;
+            this.btnCrearBD.Click += new System.EventHandler(this.btnCrearBD_Click);
             // 
             // Form1
             // 

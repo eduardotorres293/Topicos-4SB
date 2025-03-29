@@ -2,37 +2,25 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace AccesoBaseDatos1
 {
     public partial class Form1 : Form
     {
-        private string Servidor = "ACARDENAS\\SQLDEVELOP2008R2";
-        private string Basedatos = "ESCOLAR";
-        private string UsuarioId = "sa";
-        private string Password = "sa2024";
+        private EjecutaComandoMySql ejecutaMySql = new EjecutaComandoMySql();
+        private EjecutaComandoSqlServer ejecutaSqlServer = new EjecutaComandoSqlServer();
 
         private void EjecutaComando(string ConsultaSQL)
         {
             try
             {
-                string strConn = $"Server={Servidor};" +
-                    $"Database={Basedatos};" +
-                    $"User Id={UsuarioId};" +
-                    $"Password={Password}";
-
-                if(chkSQLServer.Checked)
-                {
-                    SqlConnection conn = new SqlConnection(strConn);
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = conn;
-                    cmd.CommandText = ConsultaSQL;
-                    cmd.ExecuteNonQuery();
-                }
+                if (chkSQLServer.Checked)
+                    ejecutaSqlServer.Ejecutar(ConsultaSQL);
+                else if (chkMySQL.Checked)
+                    ejecutaMySql.Ejecutar(ConsultaSQL);
 
                 llenarGrid();
-
             }
             catch (SqlException Ex)
             {
@@ -45,35 +33,14 @@ namespace AccesoBaseDatos1
         }
         private void llenarGrid()
         {
-            try
+            DataTable datos = chkSQLServer.Checked
+                ? ejecutaSqlServer.ObtenerDatos("SELECT * FROM Alumnos")
+                : ejecutaMySql.ObtenerDatos("SELECT * FROM Alumnos");
+
+            if (datos != null)
             {
-                string strConn = $"Server={Servidor};" +
-                    $"Database={Basedatos};" +
-                    $"User Id={UsuarioId};" +
-                    $"Password={Password}";
-
-                if (chkSQLServer.Checked)
-                {
-                    SqlConnection conn = new SqlConnection(strConn);
-                    conn.Open();
-
-                    string sqlQuery = "select * from Alumnos";
-                    SqlDataAdapter adp = new SqlDataAdapter(sqlQuery, conn);
-
-                    DataSet ds = new DataSet();
-                    adp.Fill(ds, "Alumnos");
-                    dgvAlumnos.DataSource = ds.Tables[0];
-                }
-
+                dgvAlumnos.DataSource = datos;
                 dgvAlumnos.Refresh();
-            }
-            catch (SqlException Ex)
-            {
-                MessageBox.Show(Ex.Message);
-            }
-            catch (Exception Ex)
-            {
-                MessageBox.Show("Error en el sistema");
             }
         }
 
@@ -84,35 +51,7 @@ namespace AccesoBaseDatos1
 
         private void btnCrearBD_Click(object sender, EventArgs e)
         {
-            try
-            {              
-                string strConn = $"Server={Servidor};" +
-                    $"Database=master;" +
-                    $"User Id={UsuarioId};" +
-                    $"Password={Password}";
-
-                if (chkSQLServer.Checked)
-                {
-                    SqlConnection conn = new SqlConnection(strConn);
-                    conn.Open();
-
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = conn;
-                    cmd.CommandText = "CREATE DATABASE ESCOLAR";
-                    cmd.ExecuteNonQuery();
-
-                }
-
-
-            }
-            catch (SqlException  Ex)
-            {
-                MessageBox.Show(Ex.Message);
-            }
-            catch (Exception Ex )
-            {
-                MessageBox.Show("Error en el sistema");
-            }
+            EjecutaComando("CREATE DATABASE ESCOLAR");
         }
 
         private void btnCreaTabla_Click(object sender, EventArgs e)
@@ -123,48 +62,20 @@ namespace AccesoBaseDatos1
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
-            try
+            if (string.IsNullOrWhiteSpace(txtNoControl.Text) ||
+                string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtCarrera.Text))
             {
-                if (txtNoControl.Text.Trim().Length == 0 ||
-                    txtNombre.Text.Trim().Length == 0 ||
-                    txtCarrera.Text.Trim().Length == 0)
-                {
-                    string strConn = $"Server={Servidor};" +
-                        $"Database={Basedatos};" +
-                        $"User Id={UsuarioId};" +
-                        $"Password={Password}";
-
-                    if (chkSQLServer.Checked)
-                    {
-                        SqlConnection conn = new SqlConnection(strConn);
-                        conn.Open();
-                        SqlCommand cmd = new SqlCommand();
-                        cmd.Connection = conn;
-                        cmd.CommandText = "INSERT INTO " +
-                            "Alumnos (NoControl, nombre, carrera) " +
-                            "VALUES ('" + txtNoControl.Text +
-                            "', '" + txtNombre.Text +
-                            "', " + txtCarrera.Text + ")";
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    llenarGrid();
-                }
-
+                MessageBox.Show("Todos los campos son obligatorios.");
+                return;
             }
-            catch (SqlException Ex)
-            {
-                MessageBox.Show(Ex.Message);
-            }
-            catch (Exception Ex)
-            {
-                MessageBox.Show("Error en el sistema");
-            }
+
+            string consulta = $"INSERT INTO Alumnos (NoControl, Nombre, Carrera) VALUES ('{txtNoControl.Text}', '{txtNombre.Text}', {txtCarrera.Text})";
+            EjecutaComando(consulta);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            chkSQLServer.Checked = true;
             llenarGrid();
         }
 
