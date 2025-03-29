@@ -12,7 +12,7 @@ namespace AccesoBaseDatos1
     internal class ClaseSQLServer
     {
         private string Servidor = "DESKTOP-CC63E9C\\TEW_SQLEXPRESS";
-        private string Basedatos = "ESCOLAR";
+        private string Basedatos = "master";
         private string UsuarioId = "sa";
         private string Password = "1234";
 
