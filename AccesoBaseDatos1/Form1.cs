@@ -74,6 +74,52 @@ namespace AccesoBaseDatos1
             EjecutaComando(consulta);
         }
 
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNoControl.Text))
+            {
+                MessageBox.Show("Debe ingresar un número de control válido");
+                return;
+            }
+
+            string consulta = $"DELETE FROM Alumnos WHERE NoControl = '{txtNoControl.Text}'";
+            EjecutaComando(consulta);
+        }
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNoControl.Text) ||
+                string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtCarrera.Text))
+            {
+                MessageBox.Show("Es necesario llenar todos los campos");
+                return;
+            }
+
+            string consulta = $"UPDATE Alumnos SET Nombre = '{txtNombre.Text}', Carrera = {txtCarrera.Text} WHERE NoControl = '{txtNoControl.Text}'";
+            EjecutaComando(consulta);
+        }
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtNoControl.Text))
+            {
+                MessageBox.Show("Ingrese un número de control válido para buscar");
+                return;
+            }
+
+            DataTable datos = chkSQLServer.Checked
+                ? ejecutaSqlServer.ObtenerDatos($"SELECT * FROM Alumnos WHERE NoControl = '{txtNoControl.Text}'")
+                : ejecutaMySql.ObtenerDatos($"SELECT * FROM Alumnos WHERE NoControl = '{txtNoControl.Text}'");
+
+            if (datos.Rows.Count > 0)
+            {
+                dgvAlumnos.DataSource = datos;
+                dgvAlumnos.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("No se encontraron registros.");
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             llenarGrid();
