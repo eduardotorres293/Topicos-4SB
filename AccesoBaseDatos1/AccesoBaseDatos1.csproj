@@ -190,8 +190,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EjecutaComandoMySql.cs" />
-    <Compile Include="EjecutaComandoSqlServer.cs" />
+    <Compile Include="ClaseMySQL.cs" />
+    <Compile Include="ClaseSQLServer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

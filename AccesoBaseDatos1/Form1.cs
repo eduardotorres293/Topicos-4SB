@@ -8,17 +8,17 @@ namespace AccesoBaseDatos1
 {
     public partial class Form1 : Form
     {
-        private EjecutaComandoMySql ejecutaMySql = new EjecutaComandoMySql();
-        private EjecutaComandoSqlServer ejecutaSqlServer = new EjecutaComandoSqlServer();
+        private ClaseMySQL ejecutaMySql = new ClaseMySQL();
+        private ClaseSQLServer ejecutaSqlServer = new ClaseSQLServer();
 
         private void EjecutaComando(string ConsultaSQL)
         {
             try
             {
                 if (chkSQLServer.Checked)
-                    ejecutaSqlServer.Ejecutar(ConsultaSQL);
+                    ejecutaSqlServer.EjecutarComando(ConsultaSQL);
                 else if (chkMySQL.Checked)
-                    ejecutaMySql.Ejecutar(ConsultaSQL);
+                    ejecutaMySql.EjecutarComando(ConsultaSQL);
 
                 llenarGrid();
             }

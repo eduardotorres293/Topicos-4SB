@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AccesoBaseDatos1
 {
-    internal class EjecutaComandoMySql
+    internal class ClaseMySQL
     {
         private string Servidor = "localhost";
         private string Basedatos = "sys";
@@ -21,7 +21,7 @@ namespace AccesoBaseDatos1
             return $"Server={Servidor};Database={Basedatos};User Id={UsuarioId};Password={Password}";
         }
 
-        public void Ejecutar(string ConsultaSQL)
+        public void EjecutarComando(string ConsultaSQL)
         {
             try
             {

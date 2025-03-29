@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace AccesoBaseDatos1
 {
-    internal class EjecutaComandoSqlServer
+    internal class ClaseSQLServer
     {
         private string Servidor = "DESKTOP-CC63E9C\\TEW_SQLEXPRESS";
         private string Basedatos = "ESCOLAR";
@@ -21,7 +21,7 @@ namespace AccesoBaseDatos1
             return $"Server={Servidor};Database={Basedatos};User Id={UsuarioId};Password={Password}";
         }
 
-        public void Ejecutar(string ConsultaSQL)
+        public void EjecutarComando(string ConsultaSQL)
         {
             try
             {
