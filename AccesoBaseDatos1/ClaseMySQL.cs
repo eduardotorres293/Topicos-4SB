@@ -16,11 +16,19 @@ namespace AccesoBaseDatos1
         private string UsuarioId = "root";
         private string Password = "";
 
+        /// <summary>
+        /// Obtiene la cadena de conexión para MySQL.
+        /// </summary>
+        /// <returns>Cadena de conexión a MySQL.</returns>
         private string ObtenerCadenaConexion()
         {
             return $"Server={Servidor};Database={Basedatos};User Id={UsuarioId};Password={Password}";
         }
 
+        /// <summary>
+        /// Ejecuta un comando SQL en MySQL.
+        /// </summary>
+        /// <param name="ConsultaSQL">Consulta SQL a ejecutar.</param>
         public void EjecutarComando(string ConsultaSQL)
         {
             try
@@ -40,6 +48,11 @@ namespace AccesoBaseDatos1
             }
         }
 
+        /// <summary>
+        /// Obtiene datos de MySQL según la consulta dada.
+        /// </summary>
+        /// <param name="consulta">Consulta SQL para obtener datos.</param>
+        /// <returns>DataTable con los resultados de la consulta.</returns>
         public DataTable ObtenerDatos(string consulta)
         {
             try
