@@ -8,9 +8,20 @@ namespace AccesoBaseDatos1
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Instancia para ejecutar comandos en MySQL.
+        /// </summary>
         private ClaseMySQL ejecutaMySql = new ClaseMySQL();
+
+        /// <summary>
+        /// Instancia para ejecutar comandos en SQL Server.
+        /// </summary>
         private ClaseSQLServer ejecutaSqlServer = new ClaseSQLServer();
 
+        /// <summary>
+        /// Ejecuta un comando SQL en la base de datos seleccionada.
+        /// </summary>
+        /// <param name="ConsultaSQL">Consulta SQL a ejecutar.</param>
         private void EjecutaComando(string ConsultaSQL)
         {
             try
@@ -31,6 +42,10 @@ namespace AccesoBaseDatos1
                 MessageBox.Show("Error en el sistema");
             }
         }
+
+        /// <summary>
+        /// Llena el DataGridView con los datos de la tabla "Alumnos".
+        /// </summary>
         private void llenarGrid()
         {
             DataTable datos = chkSQLServer.Checked
@@ -44,22 +59,33 @@ namespace AccesoBaseDatos1
             }
         }
 
+        /// <summary>
+        /// Constructor de la clase Form1.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Crea una base de datos llamada "ESCOLAR".
+        /// </summary>
         private void btnCrearBD_Click(object sender, EventArgs e)
         {
             EjecutaComando("CREATE DATABASE ESCOLAR");
         }
 
+        /// <summary>
+        /// Crea la tabla "Alumnos" en la base de datos seleccionada.
+        /// </summary>
         private void btnCreaTabla_Click(object sender, EventArgs e)
         {
-            EjecutaComando("CREATE TABLE " +
-                    "Alumnos (NoControl varchar(10), nombre varchar(50), carrera int)");
+            EjecutaComando("CREATE TABLE Alumnos (NoControl varchar(10), nombre varchar(50), carrera int)");
         }
 
+        /// <summary>
+        /// Inserta un nuevo alumno en la base de datos.
+        /// </summary>
         private void btnInsertar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNoControl.Text) ||
@@ -74,6 +100,9 @@ namespace AccesoBaseDatos1
             EjecutaComando(consulta);
         }
 
+        /// <summary>
+        /// Elimina un alumno de la base de datos mediante su número de control.
+        /// </summary>
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNoControl.Text))
@@ -85,6 +114,10 @@ namespace AccesoBaseDatos1
             string consulta = $"DELETE FROM Alumnos WHERE NoControl = '{txtNoControl.Text}'";
             EjecutaComando(consulta);
         }
+
+        /// <summary>
+        /// Actualiza la información de un alumno en la base de datos.
+        /// </summary>
         private void btnActualizar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNoControl.Text) ||
@@ -98,6 +131,10 @@ namespace AccesoBaseDatos1
             string consulta = $"UPDATE Alumnos SET Nombre = '{txtNombre.Text}', Carrera = {txtCarrera.Text} WHERE NoControl = '{txtNoControl.Text}'";
             EjecutaComando(consulta);
         }
+
+        /// <summary>
+        /// Busca un alumno en la base de datos mediante su número de control.
+        /// </summary>
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNoControl.Text))
@@ -120,11 +157,18 @@ namespace AccesoBaseDatos1
                 MessageBox.Show("No se encontraron registros.");
             }
         }
+
+        /// <summary>
+        /// Evento que se ejecuta cuando el formulario carga, llena el DataGridView.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             llenarGrid();
         }
 
+        /// <summary>
+        /// Refresca los datos en el DataGridView.
+        /// </summary>
         private void btnRefrescar_Click(object sender, EventArgs e)
         {
             llenarGrid();
