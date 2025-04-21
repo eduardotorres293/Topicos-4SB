@@ -1,4 +1,6 @@
-﻿namespace Practica5
+﻿using Practica_5.Pages;
+
+namespace Practica_5
 {
     public partial class MainPage : ContentPage
     {
@@ -13,12 +15,12 @@
 
         private async void IrCrearContacto(object sender, EventArgs e)
         {
-            // Aquí puedes enlazar con otra página para crear un contacto
+            await Navigation.PushAsync(new CrearContactoPage());
         }
 
         private async void IrConfiguracion(object sender, EventArgs e)
         {
-            // Aquí puedes enlazar con una página de configuración
+            await Navigation.PushAsync(new ConfiguracionPage());
         }
     }
 }
