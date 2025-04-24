@@ -45,7 +45,7 @@ namespace Practica5.ViewModel
 
 
             ContactosVM.ListaContactos.Add(nuevoContacto);
-            await Shell.Current.DisplayAlert("Exito", "Contacto añadido correctamente.", "OK");
+            await Shell.Current.DisplayAlert("Exito", "Contacto añadido correctamente", "OK");
             await Shell.Current.GoToAsync("..");
         }
     }

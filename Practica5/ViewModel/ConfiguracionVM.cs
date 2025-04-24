@@ -21,7 +21,7 @@ namespace Practica5.ViewModel
         public ConfiguracionVM()
         {
             CambiarTemaCommand = new Command(() => {
-                // Lógica de cambio de tema aquí
+                
             });
         }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Practica5.ViewModel
 {
-    internal class BaseVM : INotifyPropertyChanged
+    public class BaseVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

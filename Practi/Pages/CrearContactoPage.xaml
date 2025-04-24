@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Proyecto5.Pages.CrearContactoPage"
+             Title="Crear nuevo contacto">
+    <FlexLayout Direction="Column" AlignItems="Start"
+JustifyContent="Center" Padding="20">
+        <Entry x:Name="entNombre" Placeholder="Nombre" WidthRequest="250" />
+        <Entry x:Name="entTelefono" Placeholder="Teléfono" WidthRequest="250" />
+        <Entry x:Name="entCorreo" Placeholder="Correo" WidthRequest="250" />
+        <Entry x:Name="entDireccion" Placeholder="Dirección" WidthRequest="250" />
+
+        <Button Text="Guardar Contacto" WidthRequest="250" Clicked="OnGuardarClicked" />
+    </FlexLayout>
+</ContentPage>

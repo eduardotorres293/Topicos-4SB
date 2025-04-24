@@ -8,10 +8,10 @@ using Practica5.Model;
 namespace Practica5.ViewModel
 {
     [QueryProperty(nameof(Contacto), "Contacto")]
-    internal class DetalleContactoVM : BaseVM
+    public class DetalleContactoVM : BaseVM
     {
-        private Contacto _contacto;
-        public Contacto Contacto
+        private Contacto? _contacto;
+        public Contacto? Contacto
         {
             get => _contacto;
             set => SetProperty(ref _contacto, value);

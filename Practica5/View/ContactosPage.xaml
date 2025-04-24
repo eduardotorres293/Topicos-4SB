@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Practica5.View.ContactosPage"
-             Title="Contactos">
+             x:Class="Practica5.View.ContactosPage">
+
     <VerticalStackLayout Padding="10">
         <Label Text="Mis Contactos" FontSize="Large" />
-        <CollectionView ItemsSource="{Binding Contactos}">
+        <CollectionView ItemsSource="{Binding Contactos}" SelectionMode="Single" SelectionChanged="OnContactoSeleccionado">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="5" Padding="10">

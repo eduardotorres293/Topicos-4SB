@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Practica5.Model;
+using Practica5.View;
 
 namespace Practica5.ViewModel
 {
