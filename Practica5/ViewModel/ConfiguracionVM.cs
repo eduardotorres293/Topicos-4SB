@@ -12,17 +12,28 @@ namespace Practica5.ViewModel
         private bool _notificacionesActivadas;
         public bool NotificacionesActivadas
         {
-            get => _notificacionesActivadas;
-            set => SetProperty(ref _notificacionesActivadas, value);
+            get => Preferences.Get(nameof(NotificacionesActivadas), false);
+            set
+            {
+                if (SetProperty(ref _notificacionesActivadas, value))
+                {
+                    Preferences.Set(nameof(NotificacionesActivadas), value);
+                }
+            }
         }
 
         public ICommand CambiarTemaCommand { get; }
 
         public ConfiguracionVM()
         {
-            CambiarTemaCommand = new Command(() => {
-                
-            });
+            CambiarTemaCommand = new Command(CambiarTema);
+        }
+        private void CambiarTema()
+        {
+            var temaActual = Application.Current.UserAppTheme;
+
+            Application.Current.UserAppTheme =
+                temaActual == AppTheme.Dark ? AppTheme.Light : AppTheme.Dark;
         }
     }
 }

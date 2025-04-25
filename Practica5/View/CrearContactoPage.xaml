@@ -6,8 +6,8 @@
     <FlexLayout Direction="Column" AlignItems="Start" JustifyContent="Center" Padding="20">
         <Entry Placeholder="Nombre" WidthRequest="250" Text="{Binding Nombre}" />
         <Entry Placeholder="Teléfono" WidthRequest="250" Text="{Binding Telefono}" />
-        <Entry Placeholder="Correo" WidthRequest="250" Text="{Binding Correo}" />
-        <Entry Placeholder="Dirección" WidthRequest="250" Text="{Binding Direccion}" />
+        <Entry Placeholder="Correo (opcional)" WidthRequest="250" Text="{Binding Correo}" />
+        <Entry Placeholder="Dirección (opcional)" WidthRequest="250" Text="{Binding Direccion}" />
         
         <Button Text="Guardar Contacto" WidthRequest="250" Command="{Binding GuardarContactoCommand}" />
     </FlexLayout>

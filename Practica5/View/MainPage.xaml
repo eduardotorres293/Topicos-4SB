@@ -4,8 +4,8 @@
              x:Class="Practica5.MainPage">
 
     <StackLayout Padding="20">
-        <Button Text="Lista de Contactos" Clicked="IrListaContactos" />
-        <Button Text="Crear Nuevo Contacto" Clicked="IrCrearContacto" />
-        <Button Text="Configuración" Clicked="IrConfiguracion" />
+        <Button Text="Lista de Contactos" Clicked="IrListaContactos" Margin="5"/>
+        <Button Text="Crear Nuevo Contacto" Clicked="IrCrearContacto" Margin="5"/>
+        <Button Text="Configuración" Clicked="IrConfiguracion" Margin="5"/>
     </StackLayout>
 </ContentPage>
