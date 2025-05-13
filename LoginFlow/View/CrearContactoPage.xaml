@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Practica5.View.CrearContactoPage"
+             Title="Crear contacto">
+    <FlexLayout Direction="Column" AlignItems="Start" JustifyContent="Center" Padding="20">
+        <Entry Placeholder="Nombre" WidthRequest="250" Text="{Binding Nombre}" />
+        <Entry Placeholder="Teléfono" WidthRequest="250" Text="{Binding Telefono}" />
+        <Entry Placeholder="Correo (opcional)" WidthRequest="250" Text="{Binding Correo}" />
+        <Entry Placeholder="Dirección (opcional)" WidthRequest="250" Text="{Binding Direccion}" />
+        
+        <Button Text="Guardar Contacto" WidthRequest="250" Command="{Binding GuardarContactoCommand}" />
+    </FlexLayout>
+</ContentPage>

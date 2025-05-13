@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Practica5.View.DetalleContactoPage"
+             Title="Detalle de contacto">
+
+    <Grid Padding="20" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto">
+        <Label Grid.Row="0" Grid.Column="0" Text="Nombre:" FontAttributes="Bold" FontSize="Medium" Margin="0,10" />
+        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Contacto.Nombre}" FontSize="Medium" Margin="10,10" />
+
+        <Label Grid.Row="1" Grid.Column="0" Text="Teléfono:" FontAttributes="Bold" FontSize="Medium" Margin="0,10" />
+        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Contacto.Telefono}" FontSize="Medium" Margin="10,10" />
+
+        <Label Grid.Row="2" Grid.Column="0" Text="Correo:" FontAttributes="Bold" FontSize="Medium" Margin="0,10" />
+        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Contacto.Correo}" FontSize="Medium" Margin="10,10" />
+
+        <Label Grid.Row="3" Grid.Column="0" Text="Dirección:" FontAttributes="Bold" FontSize="Medium" Margin="0,10" />
+        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Contacto.Direccion}" FontSize="Medium" Margin="10,10" />
+    </Grid>
+</ContentPage>

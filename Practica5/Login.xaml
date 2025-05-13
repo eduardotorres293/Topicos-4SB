@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Practica5.Login"
+             Title="Login"
+             BackgroundColor="{StaticResource Primary}">
+    
+    <Grid>
+        <StackLayout Margin="20">
+            <Image Source="logo.png" HeightRequest="50"  
+                   HorizontalOptions="Center" />
+
+            <StackLayout Margin="0,20" >
+                <Label Style="{StaticResource welcome}" FontSize="32" 
+                       Text="Bienvenido"
+                       HorizontalTextAlignment="Center"/>
+                <Label FontFamily="OpenSansRegular" TextColor="{StaticResource Secondary}" 
+                       FontSize="16" Text="Acceder para continuar"
+                       HorizontalTextAlignment="Center"/>
+            </StackLayout>
+
+            <StackLayout Margin="0,20">
+                <Label FontFamily="OpenSansRegular" TextColor="{StaticResource Secondary}" 
+                       FontSize="16" Text="Usuario"/>
+                <Grid Margin="0,5">
+                    <Frame Opacity="0.3" BackgroundColor="White" CornerRadius="5"/>
+                    <Entry x:Name="usernameEntry" BackgroundColor="Transparent" Placeholder="Captura usuario" TextColor="White" Margin="5,0" PlaceholderColor="Gray" />
+
+                </Grid>
+
+                <Label FontFamily="OpenSansRegular" TextColor="{StaticResource Secondary}" 
+                       FontSize="16" Text="Password"/>
+                <Grid Margin="0,5">
+                    <Frame Opacity="0.3" BackgroundColor="White" CornerRadius="5"/>
+                    <Entry x:Name="passwordEntry" BackgroundColor="Transparent" Placeholder="Captura password" TextColor="White" Margin="5,0" PlaceholderColor="Gray" IsPassword="True"/>
+
+                </Grid>
+            </StackLayout>
+
+            <Button Margin="0,15" BackgroundColor="{StaticResource Secondary}"
+                    Text="Acceder" TextColor="{StaticResource Primary}" 
+                    FontFamily="OpenSansBold"
+                    Clicked="OnLoginClicked"/>
+
+            <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal">
+
+                <Label FontFamily="OpenSansRegular" TextColor="{StaticResource Secondary}" 
+                       FontSize="16" Text="Olvido Password?" VerticalOptions="EndAndExpand" HorizontalOptions="StartAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnForgotPasswordTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label FontFamily="OpenSansRegular" TextColor="{StaticResource Secondary}" 
+                       FontSize="16" Text="Registrar"  VerticalOptions="EndAndExpand" 
+                       HorizontalOptions="EndAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRegisterTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>
