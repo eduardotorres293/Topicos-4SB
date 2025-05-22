@@ -29,13 +29,14 @@
         Route="home" />
 
         </Tab>
-        <Tab Title="Settings" Icon="gear_fill.svg">
+        <Tab Title="Contacts" Icon="journal_check.svg">
             <ShellContent
-            Icon="house_door_fill.svg"
+                Icon="journal_check.svg"
         Title="Contacts"
         ContentTemplate="{DataTemplate view:MainPage}"
         Route="MainPage" />
         </Tab>
+        
         <Tab Title="Settings" Icon="gear_fill.svg">
             <ShellContent
                 Icon="house_door_fill.svg"
