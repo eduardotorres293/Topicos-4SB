@@ -4,9 +4,9 @@ namespace Practica5.View;
 
 public partial class ContactosPage : ContentPage
 {
-    public ContactosPage()
-    {
-        InitializeComponent();
+	public ContactosPage()
+	{
+		InitializeComponent();
         BindingContext = new ContactosVM();
     }
 }
