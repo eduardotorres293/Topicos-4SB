@@ -5,16 +5,24 @@
 
     <VerticalStackLayout Padding="10">
         <Label Text="Mis Contactos" FontSize="Large" />
-        <CollectionView ItemsSource="{Binding Contactos}" SelectionMode="Single" SelectionChanged="OnContactoSeleccionado">
+        <CollectionView ItemsSource="{Binding Contactos}" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Margin="5" Padding="10">
-                        <StackLayout>
-                            <Label Text="{Binding Nombre}" FontAttributes="Bold" />
-                            <Label Text="{Binding Telefono}" />
-                            <Label Text="{Binding Correo}" />
-                            <Label Text="{Binding Direccion}" />
-                        </StackLayout>
+                    <Frame Margin="5" Padding="10" HasShadow="True" CornerRadius="10">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+    Command="{Binding Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type ContentPage}}, Path=BindingContext.MostrarDetalleCommand}"
+    CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+
+                            <StackLayout>
+                                <Label Text="{Binding Nombre}" FontAttributes="Bold" />
+                                <Label Text="{Binding Telefono}" />
+                                <Label Text="{Binding Correo}" />
+                                <Label Text="{Binding Direccion}" />
+                            </StackLayout>
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
