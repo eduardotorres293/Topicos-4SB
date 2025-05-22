@@ -5,11 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Practica5.Model;
+using AgendaApp.Datos;
 
 namespace Practica5.ViewModel
 {
     internal class CrearContactoVM : BaseVM
     {
+        private readonly ContactoDatabase _database;
+
         private string _nombre;
         private string _telefono;
         private string _correo;
@@ -24,6 +27,7 @@ namespace Practica5.ViewModel
 
         public CrearContactoVM()
         {
+            _database = new ContactoDatabase();
             GuardarContactoCommand = new Command(GuardarContacto);
         }
 
@@ -42,6 +46,8 @@ namespace Practica5.ViewModel
                 await Shell.Current.DisplayAlert("Error", "Se debe introducir como minimo un nombre y telefono", "OK");
                 return;
             }
+
+            await _database.GuardarContactoAsync(nuevoContacto);
 
             ContactosVM.ListaContactos.Add(nuevoContacto);
             await Shell.Current.DisplayAlert("Exito", "Contacto añadido correctamente", "OK");

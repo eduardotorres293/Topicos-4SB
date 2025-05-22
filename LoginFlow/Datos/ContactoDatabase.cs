@@ -1,6 +1,6 @@
 
 using SQLite;
-using AgendaApp.Modelos;
+using Practica5.Model;
 
 namespace AgendaApp.Datos;
 

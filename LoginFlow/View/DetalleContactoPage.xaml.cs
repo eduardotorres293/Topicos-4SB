@@ -6,6 +6,7 @@ namespace Practica5.View;
 [QueryProperty(nameof(Contacto), "Contacto")]
 public partial class DetalleContactoPage : ContentPage
 {
+
     private readonly DetalleContactoVM _viewModel;
     public Contacto Contacto
     {
