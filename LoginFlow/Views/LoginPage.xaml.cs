@@ -1,7 +1,11 @@
+using AgendaApp.Datos;
+using LoginFlow.Model;
+
 namespace LoginFlow.Views;
 
 public partial class LoginPage : ContentPage
 {
+    private readonly ContactoDatabase _db = new();
     public LoginPage()
     {
         InitializeComponent();
@@ -34,39 +38,51 @@ public partial class LoginPage : ContentPage
         string nuevoUsuario = await DisplayPromptAsync("Registro", "Ingresa un nombre de usuario:");
         if (string.IsNullOrWhiteSpace(nuevoUsuario)) return;
 
+        string correoIngresado = await DisplayPromptAsync("Registro", "Ingresa tu correo:");
+        if (string.IsNullOrWhiteSpace(correoIngresado)) return;
+
         string nuevaPassword = await DisplayPromptAsync("Registro", "Ingresa una contraseña:", "Registrar", "Cancelar", "", -1, Keyboard.Text);
         if (string.IsNullOrWhiteSpace(nuevaPassword)) return;
 
-        if (usuariosRegistrados.ContainsKey(nuevoUsuario))
+        if (await _db.UsuarioExisteAsync(nuevoUsuario))
         {
             await DisplayAlert("Error", "El usuario ya está registrado", "OK");
         }
         else
         {
-            usuariosRegistrados[nuevoUsuario] = nuevaPassword;
+            await _db.RegistrarUsuarioAsync(new Usuario
+            {
+                Nombre = nuevoUsuario,
+                Correo = correoIngresado,
+                Password = nuevaPassword
+            });
             await DisplayAlert("Registro exitoso", $"Usuario {nuevoUsuario} registrado", "OK");
         }
     }
 
     private async void LoginButton_Clicked(object sender, EventArgs e)
     {
-        if (IsCredentialCorrect(Username.Text, Password.Text))
+        if (await IsCredentialCorrect(Username.Text, Password.Text))
         {
-            Preferences.Set("UsuarioActual", Username.Text.Trim());
             await SecureStorage.SetAsync("hasAuth", "true");
             await Shell.Current.GoToAsync("///home");
         }
         else
         {
-            Preferences.Remove("UsuarioActual");
-            await DisplayAlert("Login failed", "Username or password if invalid", "Try again");
+            Preferences.Remove("UsuarioActualId");
+            Preferences.Remove("UsuarioActualNombre");
+            await DisplayAlert("Login failed", "Username or password is invalid", "Try again");
         }
     }
-
-
-    bool IsCredentialCorrect(string username, string password)
+    private async Task<bool> IsCredentialCorrect(string username, string password)
     {
-        return (username == "admin" && password == "1234") ||
-           (usuariosRegistrados.ContainsKey(username) && usuariosRegistrados[username] == password);
+        var usuario = await _db.ValidarUsuarioAsync(username, password);
+        if (usuario != null)
+        {
+            Preferences.Set("UsuarioActualId", usuario.Id);
+            Preferences.Set("UsuarioActualNombre", usuario.Nombre);
+            return true;
+        }
+        return false;
     }
 }
