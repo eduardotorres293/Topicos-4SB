@@ -5,7 +5,6 @@ namespace LoginFlow.Views;
 
 public partial class LoginPage : ContentPage
 {
-    private readonly ContactoDatabase _db = new();
     public LoginPage()
     {
         InitializeComponent();
@@ -44,21 +43,23 @@ public partial class LoginPage : ContentPage
         string nuevaPassword = await DisplayPromptAsync("Registro", "Ingresa una contraseña:", "Registrar", "Cancelar", "", -1, Keyboard.Text);
         if (string.IsNullOrWhiteSpace(nuevaPassword)) return;
 
-        if (await _db.UsuarioExisteAsync(nuevoUsuario))
+        if (await App.ContactoDatabase.UsuarioExisteAsync(nuevoUsuario))
         {
             await DisplayAlert("Error", "El usuario ya está registrado", "OK");
         }
         else
         {
-            await _db.RegistrarUsuarioAsync(new Usuario
+            await App.ContactoDatabase.RegistrarUsuarioAsync(new Usuario
             {
                 Nombre = nuevoUsuario,
                 Correo = correoIngresado,
                 Password = nuevaPassword
             });
+
             await DisplayAlert("Registro exitoso", $"Usuario {nuevoUsuario} registrado", "OK");
         }
     }
+
 
     private async void LoginButton_Clicked(object sender, EventArgs e)
     {
@@ -76,7 +77,7 @@ public partial class LoginPage : ContentPage
     }
     private async Task<bool> IsCredentialCorrect(string username, string password)
     {
-        var usuario = await _db.ValidarUsuarioAsync(username, password);
+        var usuario = await App.ContactoDatabase.ValidarUsuarioAsync(username, password);
         if (usuario != null)
         {
             Preferences.Set("UsuarioActualId", usuario.Id);
@@ -85,4 +86,5 @@ public partial class LoginPage : ContentPage
         }
         return false;
     }
+
 }

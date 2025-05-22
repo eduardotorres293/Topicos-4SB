@@ -11,9 +11,10 @@ public partial class SettingsPage : ContentPage
 	{
 		if (await DisplayAlert("Are you sure?", "You will be logged out.", "Yes", "No"))
 		{
-            Preferences.Remove("UsuarioActual");
-            SecureStorage.RemoveAll();
-			await Shell.Current.GoToAsync("///login");
+            Preferences.Remove("UsuarioActualId");
+            Preferences.Remove("UsuarioActualNombre");
+            await SecureStorage.SetAsync("hasAuth", "false");
+            await Shell.Current.GoToAsync("///login");
 		}
 	}
 }

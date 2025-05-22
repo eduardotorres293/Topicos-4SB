@@ -1,4 +1,5 @@
-﻿#if __ANDROID__
+﻿using AgendaApp.Datos;
+#if __ANDROID__
 using Android.Content.Res;
 
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
@@ -8,11 +9,19 @@ namespace LoginFlow;
 
 public partial class App : Application
 {
+    public static ContactoDatabase ContactoDatabase { get; private set; }
     public App()
     {
+
         InitializeComponent();
 
         MainPage = new AppShell();
+
+        ContactoDatabase = new ContactoDatabase();
+        if (Preferences.ContainsKey("UsuarioActualId"))
+            Shell.Current.GoToAsync("//home");
+        else
+            Shell.Current.GoToAsync("//login");
 
         Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("NoUnderLine", (handler, view) =>
         {

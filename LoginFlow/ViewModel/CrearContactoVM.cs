@@ -38,7 +38,8 @@ namespace Practica5.ViewModel
                 Nombre = this.Nombre,
                 Telefono = this.Telefono,
                 Correo = this.Correo,
-                Direccion = this.Direccion
+                Direccion = this.Direccion,
+                UsuarioId = Preferences.Get("UsuarioActualId", 0)
             };
 
             if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Telefono))

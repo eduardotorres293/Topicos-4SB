@@ -33,7 +33,8 @@ namespace Practica5.ViewModel
         }
         public async Task CargarContactosAsync()
         {
-            var contactos = await _database.ObtenerContactosAsync();
+            int userId = Preferences.Get("UsuarioActualId", 0);
+            var contactos = await _database.ObtenerContactosPorUsuarioAsync(userId);
             ListaContactos.Clear();
             foreach (var c in contactos)
                 ListaContactos.Add(c);
