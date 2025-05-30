@@ -20,10 +20,12 @@ namespace Practica5.ViewModel
             set => SetProperty(ref _contacto, value);
         }
         public ICommand EliminarContactoCommand { get; }
+        public ICommand EditarContactoCommand { get; }
 
         public DetalleContactoVM()
         {
             EliminarContactoCommand = new Command(async () => await EliminarContacto());
+            EditarContactoCommand = new Command(async () => await EditarContacto());
             _database = new ContactoDatabase();
         }
 
@@ -50,6 +52,16 @@ namespace Practica5.ViewModel
             await Application.Current.MainPage.DisplayAlert("Éxito", "Contacto eliminado", "OK");
 
             await Shell.Current.GoToAsync("..");
+        }
+        private async Task EditarContacto()
+        {
+            if (Contacto == null)
+                return;
+
+            await Shell.Current.GoToAsync("EditarContactoPage", true, new Dictionary<string, object>
+            {
+                { "Contacto", Contacto }
+            });
         }
     }
 
