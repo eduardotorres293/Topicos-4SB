@@ -10,7 +10,8 @@
                HasShadow="True"
                Margin="0,-20,0,0"
                ZIndex="0"
-               Padding="8">
+               Padding="8"
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
                 <Frame.Shadow>
                     <Shadow Brush="Black"
                 Offset="20,20"
@@ -48,7 +49,9 @@
                                    VerticalOptions="Center"
                                    FontSize="16"
                                    Margin="0,0,10,0" />
-                                <Switch IsToggled="{Binding NotificacionesActivadas}" />
+                                <Switch IsToggled="{Binding NotificacionesActivadas}"
+                                    AbsoluteLayout.LayoutBounds="-0.1,0.3,100,30"
+                                    AbsoluteLayout.LayoutFlags="PositionProportional" />
                             </HorizontalStackLayout>
                             
                             <Button Text="Cambiar Tema"
