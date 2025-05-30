@@ -1,3 +1,5 @@
+using Practica5.ViewModel;
+
 namespace LoginFlow.Views;
 
 public partial class SettingsPage : ContentPage
@@ -5,7 +7,8 @@ public partial class SettingsPage : ContentPage
 	public SettingsPage()
 	{
 		InitializeComponent();
-	}
+        BindingContext = new ConfiguracionVM();
+    }
 
 	private async void LogoutButton_Clicked(object sender, EventArgs e)
 	{
