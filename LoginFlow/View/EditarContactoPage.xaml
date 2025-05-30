@@ -6,8 +6,8 @@
     <VerticalStackLayout Padding="20" Spacing="15">
         <Entry Placeholder="Nombre" Text="{Binding Contacto.Nombre}" />
         <Entry Placeholder="Teléfono" Text="{Binding Contacto.Telefono}" />
-        <Entry Placeholder="Correo" Text="{Binding Contacto.Correo}" />
-        <Entry Placeholder="Dirección" Text="{Binding Contacto.Direccion}" />
+        <Entry Placeholder="Correo (opcional)" Text="{Binding Contacto.Correo}" />
+        <Entry Placeholder="Dirección (opcional)" Text="{Binding Contacto.Direccion}" />
 
         <Button Text="Guardar cambios"
                 Command="{Binding GuardarCambiosCommand}" />
